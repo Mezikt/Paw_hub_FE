@@ -14,7 +14,7 @@ interface Order {
   selector: 'app-client-order-history',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './client-order-history.component.html'
+  templateUrl: './order-history.component.html'
 })
 export class ClientOrderHistoryComponent implements OnInit {
   orders: Order[] = [];
