@@ -36,6 +36,7 @@ export class LoginComponent {
   onSubmit() {
     this.error = '';
     const success = this.authService.login(this.email, this.password);
+    console.log('Login success:', success);
     if (success) {
       this.router.navigate(['/perfil']);
     } else {
