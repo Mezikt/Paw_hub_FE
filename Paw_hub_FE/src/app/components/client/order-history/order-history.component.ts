@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 
 interface Order {
   id: number;
@@ -13,7 +15,7 @@ interface Order {
 @Component({
   selector: 'app-client-order-history',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './order-history.component.html'
 })
 export class ClientOrderHistoryComponent implements OnInit {
@@ -21,8 +23,10 @@ export class ClientOrderHistoryComponent implements OnInit {
   currentUser = 'João Silva'; // Podes buscar do perfil/autenticação
 
   ngOnInit() {
-    this.orders = (JSON.parse(localStorage.getItem('orders') || '[]') as Order[])
-      .filter(order => order.clientName === this.currentUser);
+    // Mock: substituir pelo método real de obter o nome/email/ID do cliente autenticado
+    const clienteLogado = this.currentUser;
+    const allOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+    this.orders = allOrders.filter((order: any) => order.clientName === clienteLogado);
   }
 
   confirmDelivered(order: Order) {

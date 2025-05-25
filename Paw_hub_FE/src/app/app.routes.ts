@@ -20,7 +20,7 @@ export const routes: Routes = [
   { path: 'profile', loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent), /*canActivate: [AuthGuard]*/},
   { path: 'cart', loadComponent: () => import('./components/cart/cart/cart.component').then(m => m.CartComponent), /*canActivate: [ClientGuard]*/ },
   { path: 'checkout', loadComponent: () => import('./components/cart/checkout/checkout.component').then(m => m.CheckoutComponent), /*canActivate: [ClientGuard]*/ },
-  { path: 'orders', loadComponent: () => import('./components/orders/user-orders/user-orders.component').then(m => m.UserOrdersComponent), /*canActivate: [ClientGuard]*/ },
+  { path: 'orders', loadComponent: () => import('./components/orders/order/order.component').then(m => m.OrderComponent), /*canActivate: [ClientGuard]*/ },
   { path: 'restaurant/menus', loadComponent: () => import('./components/restaurant/menu-list/menu-list.component').then(m => m.MenuListComponent), /*canActivate: [RestaurantGuard]*/ },
   { path: 'restaurant/menu-management', component: MenuManagementComponent },
   { path: 'admin', loadComponent: () => import('./components/admin/admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent), /*canActivate: [AdminGuard]*/ },
