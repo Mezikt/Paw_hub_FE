@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'menus', component: MenuListComponent },
   { path: 'menus/create', component: MenuCreateComponent },
   { path: 'menus/edit', component: MenuEditComponent },
-  { path: 'menus/details', component: DishDetailsComponent }
+  { path: 'menus/details', component: DishDetailsComponent },
+  { path: 'perfil', loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent) } // <-- Adiciona aqui!
 ];
 
 @NgModule({

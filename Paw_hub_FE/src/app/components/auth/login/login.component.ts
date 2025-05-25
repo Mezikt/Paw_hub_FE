@@ -23,21 +23,23 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatIconModule,
   ],
-  
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username = '';
+  email = '';
   password = '';
-  email = ''; 
+  error = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin() {
-    this.authService.login({ username: this.username, password: this.password }).subscribe({
-      next: () => this.router.navigate(['/']),
-      error: err => console.error('Login failed', err)
-    });
+  onSubmit() {
+    this.error = '';
+    const success = this.authService.login(this.email, this.password);
+    if (success) {
+      this.router.navigate(['/perfil']);
+    } else {
+      this.error = 'Credenciais inválidas!';
+    }
   }
 }
