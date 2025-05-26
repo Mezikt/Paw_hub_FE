@@ -1,10 +1,15 @@
+<app-filters-panel
+  [categories]="categories"
+  (filtersChanged)="onFiltersChanged($event)">
+</app-filters-panel>
+
 <div *ngIf="loading">A carregar menus...</div>
 <div *ngIf="error">{{ error }}</div>
 
 <a routerLink="/add-menu">Adicionar prato</a>
 
 <ul>
-  <li *ngFor="let menu of menus">
+  <li *ngFor="let menu of filteredMenus()">
     <b>{{ menu.name }}</b> - {{ menu.price | currency:'EUR':'symbol':'1.2-2' }}
     <span *ngIf="!menu.available">(Indisponível)</span>
     <a [routerLink]="['/menus', menu.id]">Detalhes</a>
