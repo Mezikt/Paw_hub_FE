@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../core/services/user-service/user.service';
 import { User } from '../../../models/user.model';
+import { AdminService } from '../../../core/services/admin-service/admin-service.service';
+
 
 @Component({
   selector: 'app-restaurant-validation',
@@ -10,30 +12,25 @@ import { User } from '../../../models/user.model';
   standalone: true,
   imports: [CommonModule]
 })
-export class RestaurantValidationComponent implements OnInit {
-  pendingUsers: User[] = [];
 
-  constructor(private userService: UserService) {}
+export class RestaurantValidationComponent implements OnInit {
+  pendingRestaurants: any[] = [];
+
+  constructor(private adminService: AdminService) {}
 
   ngOnInit() {
-    this.loadPendingUsers();
+    this.loadPending();
   }
 
-  loadPendingUsers() {
-    this.userService.getPendingRestaurantUsers().subscribe(users => {
-      this.pendingUsers = users;
-    });
+  loadPending() {
+    this.adminService.getPendingRestaurants().subscribe(data => this.pendingRestaurants = data);
   }
 
-  approve(user: User) {
-    this.userService.approveRestaurant(user.id).subscribe(() => {
-      this.loadPendingUsers();
-    });
+  approve(id: string) {
+    this.adminService.approveRestaurant(id).subscribe(() => this.loadPending());
   }
 
-  reject(user: User) {
-    this.userService.rejectRestaurant(user.id).subscribe(() => {
-      this.loadPendingUsers();
-    });
+  reject(id: string) {
+    this.adminService.rejectRestaurant(id).subscribe(() => this.loadPending());
   }
 }

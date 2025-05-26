@@ -37,4 +37,9 @@ export class UserService {
       role: 'user'
     });
   }
+
+   getProfile(): Observable<any> {
+    return this.http.get('/api/users/profile');
+  }
+
 }
