@@ -1,15 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../core/services/user-service/user.service';
-import { User } from '../../../models/user.model';
+import { RestaurantService } from '../../../core/services/restaurant-service/restaurant.service';
+import { Restaurant } from '../../../models/restaurant.model';
 
 @Component({
   selector: 'app-restaurant-profile',
-  templateUrl: './restaurant-profile.component.html'
+  templateUrl: './restaurant-profile.component.html',
+  styleUrls: ['./restaurant-profile.component.css']
 })
-export class RestaurantProfileComponent {
-  restaurant: User | null = null;
+export class RestaurantProfileComponent implements OnInit {
+  restaurant?: Restaurant;
+  loading = true;
+  error?: string;
 
-  constructor(private userService: UserService) {
-    this.restaurant = this.userService.getCurrentUser();
+  constructor(private restaurantService: RestaurantService) {}
+
+  ngOnInit(): void {
+    this.restaurantService.getMyRestaurant().subscribe({
+      next: (res) => {
+        this.restaurant = res;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Erro ao carregar restaurante';
+        this.loading = false;
+      }
+    });
   }
 }

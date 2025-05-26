@@ -1,18 +1,13 @@
-<h2>Perfil do Restaurante</h2>
-
+<div *ngIf="loading">A carregar...</div>
+<div *ngIf="error">{{ error }}</div>
 <div *ngIf="restaurant">
- <h2>Perfil do Restaurante</h2>
-<p>Nome: {{ restaurant?.personalInfo?.name }}</p>
-<p>Email: {{ restaurant?.email }}</p>
-
-  <div class="actions">
-    <button (click)="editRestaurant()">Editar Dados</button>
-    <button (click)="goToMenus()">Ver Menus</button>
-    <button (click)="goToOrders()">Ver Encomendas</button>
-    <button (click)="logout()">Terminar Sessão</button>
-  </div>
-</div>
-
-<div *ngIf="!restaurant">
-  <p>Não foi possível carregar os dados do restaurante.</p>
+  <h2>{{ restaurant.name }}</h2>
+  <img *ngIf="restaurant.imageUrl" [src]="restaurant.imageUrl" alt="Imagem restaurante" width="200" />
+  <p>{{ restaurant.description }}</p>
+  <p><b>Endereço:</b> {{ restaurant.address }}</p>
+  <p><b>Telefone:</b> {{ restaurant.phone }}</p>
+  <p><b>Email:</b> {{ restaurant.email }}</p>
+  <!-- Botão para editar -->
+  <button routerLink="/edit-restaurant">Editar restaurante</button>
+  <!-- Aqui podes incluir componentes de menus/categorias -->
 </div>
