@@ -12,3 +12,13 @@
     </ng-template>
   </mat-card-content>
 </mat-card>
+<!-- outros dados de perfil -->
+<button 
+  *ngIf="user && !user.isRestaurant && !user.pendingRestaurantApproval"
+  (click)="applyForRestaurant()">
+  Quero ser restaurante
+</button>
+<div *ngIf="user?.pendingRestaurantApproval && !user?.isRestaurant">
+  Pedido de restaurante pendente de aprovação.
+</div>
+<div *ngIf="feedback">{{ feedback }}</div>
