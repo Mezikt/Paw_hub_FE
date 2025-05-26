@@ -1,23 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from '../../../models/user.model';
-
+import { Observable, of } from 'rxjs';
+import { User } from '../../../models/user.model'; // Adjust the import path as necessary
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  constructor(private http: HttpClient) {} // <-- Adiciona isto
+  private apiUrl = '/api/users';
 
-  // ... outros métodos
+  constructor(private http: HttpClient) {}
 
-  applyForRestaurant(userId: number): Observable<any> {
-    // Ajusta o endpoint conforme o teu backend!
-    return this.http.patch(`/api/users/${userId}`, { pendingRestaurantApproval: true });
+  getCurrentUser(): User | null {
+    const userJson = localStorage.getItem('user');
+    return userJson ? JSON.parse(userJson) : null;
   }
 
-  // método exemplo para obter user atual
-  getCurrentUser(): User | null {
-    // depende da tua lógica
-    return JSON.parse(localStorage.getItem('user') || 'null');
+  applyForRestaurant(userId: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${userId}`, { pendingRestaurantApproval: true });
+  }
+
+  getPendingRestaurantUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}?pendingRestaurantApproval=true`);
+  }
+
+  approveRestaurant(userId: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${userId}`, { 
+      isValidated: true, 
+      pendingRestaurantApproval: false,
+      role: 'restaurant'
+    });
+  }
+
+  rejectRestaurant(userId: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${userId}`, { 
+      isValidated: false, 
+      pendingRestaurantApproval: false,
+      role: 'user'
+    });
   }
 }

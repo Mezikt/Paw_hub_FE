@@ -1,8 +1,14 @@
 export interface User {
-  id: number;
+  id: string;
   username: string;
   email: string;
-  isRestaurant?: boolean; // true se for restaurante aprovado
-  pendingRestaurantApproval?: boolean; // true se pediu para ser restaurante, mas ainda não foi aprovado
-  // ... outros campos
+  role: 'user' | 'restaurant' | 'admin';
+  isValidated: boolean;
+  pendingRestaurantApproval: boolean;
+  personalInfo?: {
+    name: string;
+    address?: string;
+    phone?: string;
+  };
+  // outros campos que uses
 }

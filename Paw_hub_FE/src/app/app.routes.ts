@@ -11,6 +11,12 @@ import { MenuManagementComponent } from './components/restaurant/menu-management
 import { RestaurantValidationComponent } from './components/admin/restaurant-validation/restaurant-validation.component';
 import { RestaurantOrderManagementComponent } from './components/restaurant/restaurant-order-management/restaurant-order-management.component';
 import { ClientOrderHistoryComponent } from './components/client/order-history/order-history.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RestaurantProfileComponent } from './components/restaurant/restaurant-profile/restaurant-profile.component';
+
+
+
+
 
 
 export const routes: Routes = [
@@ -28,4 +34,6 @@ export const routes: Routes = [
   { path: 'restaurant/orders', component: RestaurantOrderManagementComponent },
   { path: 'client/orders', component: ClientOrderHistoryComponent },
   { path: 'admin/restaurant-validation', component: RestaurantValidationComponent },
+  { path: 'restaurant/profile',component: RestaurantProfileComponent, canActivate: [RestaurantGuard],title: 'Perfil de Restaurante'},
+
 ];

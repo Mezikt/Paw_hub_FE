@@ -30,7 +30,7 @@ export class MenuManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.user?.isRestaurant) {
+    if (!this.user?.isValidated) {
       // Bloquear acesso, redirecionar, ou mostrar mensagem
       window.location.href = '/not-authorized'; // ajusta conforme as tuas rotas
     }

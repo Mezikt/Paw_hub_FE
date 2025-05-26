@@ -1,0 +1,18 @@
+<h2>Perfil do Restaurante</h2>
+
+<div *ngIf="restaurant">
+ <h2>Perfil do Restaurante</h2>
+<p>Nome: {{ restaurant?.personalInfo?.name }}</p>
+<p>Email: {{ restaurant?.email }}</p>
+
+  <div class="actions">
+    <button (click)="editRestaurant()">Editar Dados</button>
+    <button (click)="goToMenus()">Ver Menus</button>
+    <button (click)="goToOrders()">Ver Encomendas</button>
+    <button (click)="logout()">Terminar Sessão</button>
+  </div>
+</div>
+
+<div *ngIf="!restaurant">
+  <p>Não foi possível carregar os dados do restaurante.</p>
+</div>
